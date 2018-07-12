@@ -2,17 +2,17 @@ function getRandomNumber(max) {
 	return (Math.random() * (max - 1)).toFixed();
 }
 
-function getRandomCardsArray(initialArray, max) {
+function getRandomCardsArray(initialArray, numberOfElements) {
 	const arr = [];
 	let obj = {};
-	for (let i = 0; arr.length < max; i++) {
-		const index = getRandomNumber(max);
+	for (let i = 0; arr.length < numberOfElements; i++) {
+		const index = getRandomNumber(numberOfElements);
 		if (obj[index]) {
 			continue;
 		}
-		if (index >= max / 2) {
+		if (index >= numberOfElements / 2) {
 			obj[index] = 1;
-			arr.push(initialArray[index - max / 2]);
+			arr.push(initialArray[index - numberOfElements / 2]);
 		} else {
 			obj[index] = 1;
 			arr.push(initialArray[index]);

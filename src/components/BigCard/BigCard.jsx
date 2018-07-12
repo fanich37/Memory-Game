@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '../Button/Button';
 import './BigCard.css';
 
 const BigCard = props => {
@@ -19,9 +20,7 @@ const BigCard = props => {
 					<p>{props.description}</p>
 				</section>
 				<footer className="bigcard__footer">
-					<button type="button" onClick={() => props.closeFoundCard()}>
-						Дальше
-					</button>
+					<Button title={'Дальше'} clickHandler={props.closeFoundCard} />
 				</footer>
 			</article>
 		</div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import './Button.css';
 
-class Button extends React.Component {
+const Button = props => {
 	render() {
 		return (
 			<p>Don't forget to render smth...</p>

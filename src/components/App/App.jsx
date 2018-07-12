@@ -4,7 +4,7 @@ import Counter from '../Counter/Counter';
 import Card from '../Card/Card';
 import BigCard from '../BigCard/BigCard';
 import data from '../../../data.json';
-import { getRandomCardsArray } from '../../helpers';
+import { getRandomCardsArray, copyState } from '../../helpers';
 
 class App extends React.Component {
 	constructor(props) {
@@ -21,13 +21,11 @@ class App extends React.Component {
 	}
 
 	openCard(cardIndex) {
-		if (this.state.openCards.length === 2) {
+		console.log(this.state);
+		if (this.state.openCards.length === 2 || this.state.openCards.includes(cardIndex)) {
 			return;
 		}
-		const newState = Object.assign({}, this.state);
-		if (this.state.openCards.includes(cardIndex)) {
-			return;
-		}
+		const newState = copyState(this.state);
 		newState.openCards.push(cardIndex);
 		if (newState.openCards.length === 2) {
 			const firstCard = newState.openCards[0];
@@ -53,13 +51,16 @@ class App extends React.Component {
 	}
 
 	closeFoundCard() {
-		const newState = Object.assign({}, this.state);
+		const newState = copyState(this.state);
 		newState.showFoundCard = false;
 		this.setState(newState);
 	}
 
 	render() {
-		const foundCardIndex = this.state.showFoundCard ? this.state.foundCards[this.state.foundCards.length - 1] : 0;
+		const foundCardIndex =
+			this.state.showFoundCard && this.state.foundCards.length
+				? this.state.foundCards[this.state.foundCards.length - 1]
+				: 0;
 
 		return (
 			<div className="game">

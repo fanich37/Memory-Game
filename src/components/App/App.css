@@ -1,0 +1,17 @@
+.game {
+  position: relative;
+  margin: 0 auto;
+  padding: 120px;
+  max-width: 650px;
+  background-color: #dadada;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
+}
+
+.game__inner {
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  width: 345px;
+}

@@ -74,7 +74,7 @@ class App extends React.Component {
 
 		switch (this.state.stage) {
 			case 'start':
-				game = <Button title={'Начать игру'} clickHandler={this.startGame} />;
+				game = <Button title={'Начать игру'} clickHandler={this.startGame} modifier={'button_big'} />;
 				break;
 			case 'finish':
 				break;

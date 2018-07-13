@@ -5,7 +5,7 @@ const Button = props => {
 	return (
 		<button
 			type="button"
-			className={`button${props.modifier ? props.modifier : ''}`}
+			className={`button ${props.modifier ? props.modifier : ''}`}
 			onClick={props.clickHandler}
 			title={props.title}
 		>

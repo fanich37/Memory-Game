@@ -1,9 +1,15 @@
 .button {
   padding: 10px 20px;
   display: inline-block;
+  font-weight: 700;
   color: #fff;
   cursor: pointer;
   background-color: #000;
   border: none;
   border-radius: 4px;
+}
+
+.button_big {
+  padding: 14px 28px;
+  font-size: 20px;
 }

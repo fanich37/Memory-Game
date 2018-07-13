@@ -1,10 +1,12 @@
 import React from 'react';
 import Button from '../Button/Button';
 import './BigCard.css';
+import { getAgeFromBirthday, getPhraseAccordingToNumber } from '../../helpers.js';
 
 const BigCard = props => {
-	const photo = require(`../../img/large/l_${props.id}@2x.jpg`);
+	if (!props.isShown) return '';
 
+	const photo = require(`../../img/large/l_${props.id}@2x.jpg`);
 	return (
 		<div className={`bigcard${props.isShown ? ' bigcard_shown' : ''}`}>
 			<article className="bigcard__inner">
@@ -12,7 +14,7 @@ const BigCard = props => {
 				<header className="bigcard__header">
 					<h1 className="bigcard__title bigcard__title_h1">
 						<span>{props.name}, </span>
-						<span>{props.age}</span>
+						<span>{getPhraseAccordingToNumber(getAgeFromBirthday(props.age), ['лет', 'год', 'года'])}</span>
 					</h1>
 					<h2 className="bigcard__title bigcard__title_h2">{props.subtitle}</h2>
 				</header>

@@ -22,9 +22,12 @@
 }
 
 .bigcard__img,
-.bigcard__title,
-.bigcard__desc {
+.bigcard__title {
   margin-bottom: 10px;
+}
+
+.bigcard__desc {
+  margin-bottom: 16px;
 }
 
 .bigcard__title {

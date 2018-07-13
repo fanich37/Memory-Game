@@ -20,7 +20,7 @@ class App extends React.Component {
 		this.openCard = this.openCard.bind(this);
 		this.closeFoundCard = this.closeFoundCard.bind(this);
 		this.startGame = this.startGame.bind(this);
-		this.cards = getRandomCardsArray(data, data.length / 2);
+		this.cards = getRandomCardsArray(data, data.length * 2);
 	}
 
 	openCard(cardIndex) {
@@ -55,6 +55,9 @@ class App extends React.Component {
 	closeFoundCard() {
 		const newState = copyState(this.state);
 		newState.showFoundCard = false;
+		if (this.cards.length === newState.foundCards.length) {
+			newState.stage = 'finished';
+		}
 		this.setState(newState);
 	}
 
@@ -65,18 +68,22 @@ class App extends React.Component {
 	}
 
 	render() {
-		const foundCardIndex =
-			this.state.showFoundCard && this.state.foundCards.length
-				? this.state.foundCards[this.state.foundCards.length - 1]
-				: 0;
+		const foundCardIndex = this.state.foundCards.length
+			? this.state.foundCards[this.state.foundCards.length - 1]
+			: 0;
 
 		let game;
 
 		switch (this.state.stage) {
 			case 'start':
-				game = <Button title={'Начать игру'} clickHandler={this.startGame} modifier={'button_big'} />;
+				game = (
+					<div className="game__inner game__inner_jc_center">
+						<Button title={'Начать игру'} clickHandler={this.startGame} modifier={'button_big'} />
+					</div>
+				);
 				break;
-			case 'finish':
+			case 'finished':
+				console.log(`Чтобы найти всех политиков, Вам потребовалось ${this.state.moves} ходов`);
 				break;
 			case 'running':
 				game = (
@@ -105,6 +112,11 @@ class App extends React.Component {
 							isShown={this.state.showFoundCard}
 							closeFoundCard={this.closeFoundCard}
 						/>
+						<div style={{ display: 'none' }}>
+							{data.map(item => (
+								<img key={item.id} src={require(`../../img/large/l_${item.id}@2x.jpg`)} />
+							))}
+						</div>
 					</div>
 				);
 				break;

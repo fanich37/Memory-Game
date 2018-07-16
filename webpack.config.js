@@ -40,6 +40,9 @@ module.exports = {
 							modules: true,
 							url: true
 						}
+					},
+					{
+						loader: 'postcss-loader'
 					}
 				]
 			},

@@ -20,7 +20,7 @@ class App extends React.Component {
 		this.openCard = this.openCard.bind(this);
 		this.closeFoundCard = this.closeFoundCard.bind(this);
 		this.startGame = this.startGame.bind(this);
-		this.cards = getRandomCardsArray(data, data.length * 2);
+		this.cards = getRandomCardsArray(data, data.length / 2);
 	}
 
 	openCard(cardIndex) {

@@ -8,7 +8,7 @@ const BigCard = props => {
 
 	const photo = require(`../../img/large/l_${props.id}@2x.jpg`);
 	return (
-		<div className={`bigcard${props.isShown ? ' bigcard_shown' : ''}`}>
+		<div className={`bigcard${props.isShown ? ' bigcard_shown bigcard_scaled' : ''}`}>
 			<article className="bigcard__inner">
 				<img src={photo} alt={props.name} className="bigcard__img" />
 				<header className="bigcard__header">

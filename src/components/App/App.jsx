@@ -4,6 +4,7 @@ import Counter from '../Counter/Counter';
 import Card from '../Card/Card';
 import BigCard from '../BigCard/BigCard';
 import Button from '../Button/Button';
+import Result from '../Result/Result';
 import data from '../../../data.json';
 import { getRandomCardsArray, copyState } from '../../helpers';
 
@@ -20,7 +21,8 @@ class App extends React.Component {
 		this.openCard = this.openCard.bind(this);
 		this.closeFoundCard = this.closeFoundCard.bind(this);
 		this.startGame = this.startGame.bind(this);
-		this.cards = getRandomCardsArray(data, data.length / 2);
+		this.startGameAgain = this.startGameAgain.bind(this);
+		this.cards = getRandomCardsArray(data, data.length * 2);
 	}
 
 	openCard(cardIndex) {
@@ -67,6 +69,17 @@ class App extends React.Component {
 		this.setState(newState);
 	}
 
+	startGameAgain() {
+		const newState = copyState(this.state);
+		newState.stage = 'running';
+		newState.moves = 0;
+		newState.openCards = [];
+		newState.foundCards = [];
+		newState.showFoundCard = false;
+		this.cards = getRandomCardsArray(data, data.length * 2);
+		this.setState(newState);
+	}
+
 	render() {
 		const foundCardIndex = this.state.foundCards.length
 			? this.state.foundCards[this.state.foundCards.length - 1]
@@ -76,14 +89,15 @@ class App extends React.Component {
 
 		switch (this.state.stage) {
 			case 'start':
-				game = (
-					<div className="game__inner game__inner_jc_center">
-						<Button title={'Начать игру'} clickHandler={this.startGame} modifier={'button_big'} />
-					</div>
-				);
+				game = <Button title={'Начать игру'} clickHandler={this.startGame} modifier={'button_big'} />;
 				break;
 			case 'finished':
-				console.log(`Чтобы найти всех политиков, Вам потребовалось ${this.state.moves} ходов`);
+				game = (
+					<div>
+						<Result moves={this.state.moves} />
+						<Button title={'Играть снова'} clickHandler={this.startGameAgain} modifier={'button_big'} />
+					</div>
+				);
 				break;
 			case 'running':
 				game = (

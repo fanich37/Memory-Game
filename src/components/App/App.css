@@ -2,6 +2,9 @@
   position: relative;
   margin: 0 auto;
   padding: 60px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   max-width: 650px;
   height: 584px;
   text-align: center;
@@ -19,10 +22,6 @@
   align-items: center;
   width: 335px;
   height: 100%;
-}
-
-.game__inner_jc_center {
-  justify-content: center;
 }
 
 @media screen and (max-width: 649px) {

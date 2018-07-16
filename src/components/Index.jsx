@@ -11,7 +11,5 @@ function renderApp() {
 renderApp();
 
 if (module.hot) {
-	module.hot.accept('./App/App', () => {
-		renderApp();
-	});
+	module.hot.accept('./App/App', renderApp);
 }

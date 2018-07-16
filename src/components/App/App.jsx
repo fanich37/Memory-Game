@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import style from './App.css';
 import Counter from '../Counter/Counter';
 import Card from '../Card/Card';
 import BigCard from '../BigCard/BigCard';
@@ -89,7 +89,7 @@ class App extends React.Component {
 
 		switch (this.state.stage) {
 			case 'start':
-				game = <Button title={'Начать игру'} clickHandler={this.startGame} modifier={'button_big'} />;
+				game = <Button title={'Начать игру'} clickHandler={this.startGame} modifier={1} />;
 				break;
 			case 'finished':
 				game = (
@@ -103,7 +103,7 @@ class App extends React.Component {
 				game = (
 					<div>
 						<Counter moves={this.state.moves} />
-						<div className="game__inner">
+						<div className={style.game__inner}>
 							{this.cards.map((card, index) => {
 								return (
 									<Card
@@ -136,7 +136,7 @@ class App extends React.Component {
 				break;
 		}
 
-		return <div className="game">{game}</div>;
+		return <div className={style.game}>{game}</div>;
 	}
 }
 

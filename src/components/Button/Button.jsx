@@ -1,14 +1,11 @@
 import React from 'react';
-import './Button.css';
+import style from './Button.css';
 
 const Button = props => {
+	const buttonClasses = !props.modifier ? style.button : [style.button, style.button_big].join(' ');
+
 	return (
-		<button
-			type="button"
-			className={`button ${props.modifier ? props.modifier : ''}`}
-			onClick={props.clickHandler}
-			title={props.title}
-		>
+		<button type="button" className={buttonClasses} onClick={props.clickHandler} title={props.title}>
 			{props.title}
 		</button>
 	);

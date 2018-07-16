@@ -3,9 +3,10 @@
   margin: 0 auto 30px;
   max-width: 600px;
   padding: 124px 35px 80px;
+  background-image: url('../../img/result-bg.png');
+  background-color: #dfc990;
   background-size: cover;
   background-position: center;
-  background-color: #dfc990;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.3);
 }
 
@@ -21,8 +22,8 @@
 
 .result__inner {
   position: relative;
-  z-index: 1;
   padding: 20px;
+  line-height: 1.4;
   background-color: #fff;
   border-top: 4px solid #b88a57;
   border-radius: 2px;

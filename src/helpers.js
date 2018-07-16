@@ -60,7 +60,7 @@ export { getAgeFromBirthday };
 
 function getPhraseAccordingToNumber(number, arr) {
 	const lastChar = Number(`${number}`.charAt(`${number}`.length - 1));
-	if (lastChar === 0 || (lastChar >= 5 && lastChar <= 20)) {
+	if (lastChar === 0 || lastChar >= 5 || (number >= 5 && number <= 20)) {
 		return `${number} ${arr[0]}`;
 	}
 	if (lastChar === 1) {

@@ -6,10 +6,10 @@ import '../css/base.css';
 import App from './App/App';
 
 function renderApp() {
-	render(<App />, document.getElementById('app'));
+  render(<App />, document.getElementById('app'));
 }
 renderApp();
 
 if (module.hot) {
-	module.hot.accept('./App/App', renderApp);
+  module.hot.accept('./App/App', renderApp);
 }

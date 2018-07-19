@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 import style from './BigCard.css';
-import { getAgeFromBirthday, getPhraseAccordingToNumber } from '../../helpers.js';
+import { getAgeFromBirthday, getPhraseAccordingToNumber } from '../../helpers';
 
 const BigCard = props => {
   if (!props.isShown) return '';

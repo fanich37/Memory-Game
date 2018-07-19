@@ -8,6 +8,7 @@ function getRandomCardsArray(initialArray, numberOfElements) {
   for (let i = 0; arr.length < numberOfElements; i++) {
     const index = getRandomNumber(numberOfElements);
     if (obj[index]) {
+      // eslint-disable-next-line
       continue;
     }
     if (index >= numberOfElements / 2) {
@@ -25,7 +26,7 @@ function getRandomCardsArray(initialArray, numberOfElements) {
 export { getRandomCardsArray };
 
 function copyState(state) {
-  let newState = {};
+  const newState = {};
   for (const property in state) {
     if (
       typeof state[property] === 'number' ||
@@ -33,14 +34,17 @@ function copyState(state) {
       typeof state[property] === 'boolean'
     ) {
       newState[property] = state[property];
+      // eslint-disable-next-line
       continue;
     }
     if (typeof state[property] === 'object' && state[property].constructor.name === 'Array') {
       newState[property] = Object.assign([], state[property]);
+      // eslint-disable-next-line
       continue;
     }
     if (typeof state[property] === 'object' && state[property].constructor.name === 'Object') {
       newState[property] = Object.assign({}, state[property]);
+      // eslint-disable-next-line
       continue;
     }
   }
@@ -53,7 +57,7 @@ function getAgeFromBirthday(date) {
   const today = new Date(Date.now());
   const dateOfBirth = new Date(date);
 
-  return parseInt((today - dateOfBirth) / 31556926000);
+  return parseInt((today - dateOfBirth) / 31556926000, 10);
 }
 
 export { getAgeFromBirthday };
@@ -69,9 +73,7 @@ function getPhraseAccordingToNumber(number, arr) {
     return `${number} ${arr[1]}`;
   }
 
-  if (lastChar >= 2 || lastChar <= 4) {
-    return `${number} ${arr[2]}`;
-  }
+  return `${number} ${arr[2]}`;
 }
 
 export { getPhraseAccordingToNumber };

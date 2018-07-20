@@ -27,27 +27,25 @@ export { getRandomCardsArray };
 
 function copyState(state) {
   const newState = {};
-  for (const property in state) {
+
+  Object.keys(state).forEach(property => {
     if (
-      typeof state[property] === 'number' ||
-      typeof state[property] === 'string' ||
-      typeof state[property] === 'boolean'
+      typeof state[property] === 'number'
+      || typeof state[property] === 'string'
+      || typeof state[property] === 'boolean'
     ) {
       newState[property] = state[property];
-      // eslint-disable-next-line
-      continue;
     }
+
     if (typeof state[property] === 'object' && state[property].constructor.name === 'Array') {
       newState[property] = Object.assign([], state[property]);
-      // eslint-disable-next-line
-      continue;
     }
+
     if (typeof state[property] === 'object' && state[property].constructor.name === 'Object') {
       newState[property] = Object.assign({}, state[property]);
-      // eslint-disable-next-line
-      continue;
     }
-  }
+  });
+
   return newState;
 }
 
@@ -63,9 +61,13 @@ function getAgeFromBirthday(date) {
 export { getAgeFromBirthday };
 
 function getPhraseAccordingToNumber(number, arr) {
+  if (number >= 5 && number <= 20) {
+    return `${number} ${arr[0]}`;
+  }
+
   const lastChar = Number(`${number}`.charAt(`${number}`.length - 1));
 
-  if (lastChar === 0 || lastChar >= 5 || (number >= 5 && number <= 20)) {
+  if (lastChar === 0 || lastChar >= 5) {
     return `${number} ${arr[0]}`;
   }
 

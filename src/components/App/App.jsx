@@ -87,39 +87,42 @@ class App extends React.Component {
   }
 
   render() {
-    const foundCardIndex = this.state.foundCards.length ? this.state.foundCards[this.state.foundCards.length - 1] : 0;
+    const foundCardIndex = this.state.foundCards.length
+      ? this.state.foundCards[this.state.foundCards.length - 1]
+      : 0;
 
     let game;
 
     switch (this.state.stage) {
       case 'start':
-        game = <Button title={'Начать игру'} clickHandler={this.startGame} modifier={'button_big'} />;
+        game = <Button title="Начать игру" clickHandler={this.startGame} modifier="button_big" />;
         break;
       case 'finished':
         game = (
           <div>
             <Result moves={this.state.moves} />
-            <Button title={'Играть снова'} clickHandler={this.startGameAgain} modifier={'button_big'} />
+            <Button title="Играть снова" clickHandler={this.startGameAgain} modifier="button_big" />
           </div>
         );
         break;
       case 'running':
+      default:
         game = (
           <div>
             <Counter moves={this.state.moves} />
             <div className={style.game__inner}>
-              {this.cards.map((card, index) => {
-                return (
-                  <Card
-                    key={index}
-                    index={index}
-                    frontCard={card.id}
-                    openCard={this.openCard}
-                    isOpen={this.state.openCards.includes(index)}
-                    isFound={this.state.foundCards.includes(index)}
-                  />
-                );
-              })}
+              {this.cards.map((card, index) => (
+                <Card
+                  /* eslint-disable */
+                  key={index}
+                  /* eslint-enable */
+                  index={index}
+                  frontCard={card.id}
+                  openCard={this.openCard}
+                  isOpen={this.state.openCards.includes(index)}
+                  isFound={this.state.foundCards.includes(index)}
+                />
+              ))}
             </div>
             <BigCard
               name={this.cards[foundCardIndex].name}
@@ -131,7 +134,9 @@ class App extends React.Component {
               closeFoundCard={this.closeFoundCard}
             />
             <div style={{ display: 'none' }}>
-              {data.map(item => <img key={item.id} src={require(`../../img/large/l_${item.id}@2x.jpg`)} />)}
+              {data.map(item => (
+                <img key={item.id} src={require(`../../img/large/l_${item.id}@2x.jpg`)} alt="" />
+              ))}
             </div>
           </div>
         );

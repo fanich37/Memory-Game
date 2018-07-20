@@ -5,14 +5,14 @@ import style from './Counter.css';
 const Counter = props => (
   <div className={style.counter}>
     <p>
-      <span>Ходов: </span>
+      <span>Ходов:</span>
       <span>{props.moves}</span>
     </p>
   </div>
 );
 
 Counter.propTypes = {
-  moves: PropTypes.number
+  moves: PropTypes.number.isRequired
 };
 
 export default Counter;

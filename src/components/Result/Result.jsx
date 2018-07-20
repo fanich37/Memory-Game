@@ -6,17 +6,17 @@ import { getPhraseAccordingToNumber } from '../../helpers';
 const Result = props => (
   <div className={style.result}>
     <div className={style.result__inner}>
-      <p>{`Поздравляем! Вам удалось открыть все карточки за ${getPhraseAccordingToNumber(props.moves, [
-        'ходов',
-        'ход',
-        'хода'
-      ])}.`}</p>
+      <p>{`Поздравляем! Вам удалось открыть все карточки за ${getPhraseAccordingToNumber(
+        props.moves,
+        ['ходов', 'ход', 'хода']
+      )}.`}
+      </p>
     </div>
   </div>
 );
 
 Result.propTypes = {
-  moves: PropTypes.number
+  moves: PropTypes.number.isRequired
 };
 
 export default Result;

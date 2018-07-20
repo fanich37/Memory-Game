@@ -15,16 +15,23 @@ const BigCard = props => {
         <img src={photo} alt={props.name} className={style.bigcard__img} />
         <header className={style.bigcard__header}>
           <h1 className={[style.bigcard__title, style.bigcard__title_h1].join(' ')}>
-            <span>{props.name}, </span>
-            <span>{getPhraseAccordingToNumber(getAgeFromBirthday(props.age), ['лет', 'год', 'года'])}</span>
+            <span>
+              {props.name}
+              {', '}
+            </span>
+            <span>
+              {getPhraseAccordingToNumber(getAgeFromBirthday(props.age), ['лет', 'год', 'года'])}
+            </span>
           </h1>
-          <h2 className={[style.bigcard__title, style.bigcard__title_h2].join(' ')}>{props.subtitle}</h2>
+          <h2 className={[style.bigcard__title, style.bigcard__title_h2].join(' ')}>
+            {props.subtitle}
+          </h2>
         </header>
         <section className={style.bigcard__desc}>
           <p>{props.description}</p>
         </section>
         <footer className={style.bigcard__footer}>
-          <Button title={'Дальше'} clickHandler={props.closeFoundCard} />
+          <Button title="Дальше" clickHandler={props.closeFoundCard} />
         </footer>
       </article>
     </div>
@@ -32,13 +39,13 @@ const BigCard = props => {
 };
 
 BigCard.propTypes = {
-  isShown: PropTypes.bool,
-  id: PropTypes.string,
-  name: PropTypes.string,
-  age: PropTypes.string,
-  subtitle: PropTypes.string,
-  description: PropTypes.string,
-  closeFoundCard: PropTypes.func
+  isShown: PropTypes.bool.isRequired,
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  age: PropTypes.string.isRequired,
+  subtitle: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  closeFoundCard: PropTypes.func.isRequired
 };
 
 export default BigCard;

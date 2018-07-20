@@ -13,13 +13,13 @@
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.5.2",
     "cross-env": "^5.2.0",
     "css-loader": "^0.28.11",
-    "es6-object-assign": "^1.1.0",
     "eslint": "^5.0.1",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-loader": "^2.0.0",
@@ -31,7 +31,6 @@
     "mini-css-extract-plugin": "^0.4.1",
     "optimize-css-assets-webpack-plugin": "^4.0.3",
     "postcss-loader": "^2.1.6",
-    "prop-types": "^15.6.2",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
     "style-loader": "^0.21.0",
@@ -43,6 +42,7 @@
   },
   "dependencies": {
     "npm": "^6.1.0",
+    "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1"
   }

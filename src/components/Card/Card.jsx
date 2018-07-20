@@ -9,18 +9,23 @@ const Card = props => {
   const cardClasses = [style.card, isOpen, isFound].join(' ');
 
   return (
+    /* eslint-disable jsx-a11y/click-events-have-key-events,
+    jsx-a11y/no-static-element-interactions */
     <div className={cardClasses} onClick={() => props.openCard(Number(props.index))}>
       <div className={style.card__back} />
       <div className={style.card__front} style={{ backgroundImage: `url(${frontSrc})` }} />
     </div>
+    /* eslint-enable jsx-a11y/click-events-have-key-events,
+    jsx-a11y/no-static-element-interactions */
   );
 };
 
 Card.propTypes = {
-  frontCard: PropTypes.string,
-  isOpen: PropTypes.bool,
-  isFound: PropTypes.bool,
-  openCard: PropTypes.func
+  index: PropTypes.number.isRequired,
+  frontCard: PropTypes.string.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  isFound: PropTypes.bool.isRequired,
+  openCard: PropTypes.func.isRequired
 };
 
 export default Card;

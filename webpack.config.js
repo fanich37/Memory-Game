@@ -6,14 +6,13 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+
 const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
   context: __dirname,
   devtool: 'cheap-eval-source-map',
-  entry: {
-    'app.js': './src/components/Index.jsx'
-  },
+  entry: ['babel-polyfill', './src/components/Index.jsx'],
   output: {
     filename: 'js/app.js',
     path: path.resolve(__dirname, 'dist'),

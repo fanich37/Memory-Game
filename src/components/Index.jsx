@@ -1,4 +1,4 @@
-require('es6-object-assign').polyfill();
+/* global document */
 import React from 'react';
 import { render } from 'react-dom';
 import '../css/reset.css';

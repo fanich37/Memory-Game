@@ -1,26 +1,27 @@
+import { YEAR } from './constants/app';
+
 function getRandomNumber(max) {
   return (Math.random() * (max - 1)).toFixed();
 }
 
 function getRandomCardsArray(initialArray, numberOfElements) {
-  const arr = [];
-  let obj = {};
-  for (let i = 0; arr.length < numberOfElements; i++) {
+  const output = [];
+  const cache = {};
+  for (let i = 0; output.length < numberOfElements; i++) {
     const index = getRandomNumber(numberOfElements);
-    if (obj[index]) {
+    if (cache[index]) {
       // eslint-disable-next-line
       continue;
     }
     if (index >= numberOfElements / 2) {
-      obj[index] = 1;
-      arr.push(initialArray[index - numberOfElements / 2]);
+      cache[index] = 1;
+      output.push(initialArray[index - numberOfElements / 2]);
     } else {
-      obj[index] = 1;
-      arr.push(initialArray[index]);
+      cache[index] = 1;
+      output.push(initialArray[index]);
     }
   }
-  obj = null;
-  return arr;
+  return output;
 }
 
 export { getRandomCardsArray };
@@ -55,7 +56,7 @@ function getAgeFromBirthday(date) {
   const today = new Date(Date.now());
   const dateOfBirth = new Date(date);
 
-  return parseInt((today - dateOfBirth) / 31556926000, 10);
+  return parseInt((today - dateOfBirth) / YEAR, 10);
 }
 
 export { getAgeFromBirthday };

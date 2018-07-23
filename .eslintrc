@@ -12,6 +12,7 @@
     "comma-dangle": 0,
     "global-require": 0,
     "import/no-dynamic-require": 0,
+    "linebreak-style": 0,
     "no-plusplus": 0,
     "react/destructuring-assignment": 0,
     "react/jsx-one-expression-per-line": 0,

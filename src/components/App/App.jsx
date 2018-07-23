@@ -1,28 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import style from './App.css';
 import Counter from '../Counter/Counter';
 import Card from '../Card/Card';
 import BigCard from '../BigCard/BigCard';
 import Button from '../Button/Button';
 import Result from '../Result/Result';
-import data from '../../../data.json';
 import { getRandomCardsArray, copyState } from '../../helpers';
+import { NEW_GAME } from '../../constants/app';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      stage: 'start',
-      moves: 0,
-      openCards: [],
-      foundCards: [],
-      showFoundCard: false
-    };
+    this.state = copyState(NEW_GAME);
     this.openCard = this.openCard.bind(this);
     this.closeFoundCard = this.closeFoundCard.bind(this);
     this.startGame = this.startGame.bind(this);
     this.startGameAgain = this.startGameAgain.bind(this);
-    this.cards = getRandomCardsArray(data, data.length * 2);
+    this.cards = getRandomCardsArray(this.props.data, this.props.data.length * 2);
   }
 
   openCard(cardIndex) {
@@ -60,29 +55,19 @@ class App extends React.Component {
 
   closeFoundCard() {
     const newState = copyState(this.state);
-    newState.showFoundCard = false;
+    const isFinished = this.cards.length === newState.foundCards.length;
 
-    if (this.cards.length === newState.foundCards.length) {
-      newState.stage = 'finished';
-    }
-
-    this.setState(newState);
+    this.setState({ showFoundCard: false, stage: isFinished ? 'finished' : undefined });
   }
 
   startGame() {
-    const newState = copyState(this.state);
-    newState.stage = 'running';
-    this.setState(newState);
+    this.setState({ stage: 'running' });
   }
 
   startGameAgain() {
-    const newState = copyState(this.state);
-    newState.stage = 'running';
-    newState.moves = 0;
-    newState.openCards = [];
-    newState.foundCards = [];
-    newState.showFoundCard = false;
-    this.cards = getRandomCardsArray(data, data.length * 2);
+    const newState = copyState(NEW_GAME);
+
+    this.cards = getRandomCardsArray(this.props.data, this.props.data.length * 2);
     this.setState(newState);
   }
 
@@ -91,60 +76,72 @@ class App extends React.Component {
       ? this.state.foundCards[this.state.foundCards.length - 1]
       : 0;
 
-    let game;
-
-    switch (this.state.stage) {
-      case 'start':
-        game = <Button title="Начать игру" clickHandler={this.startGame} modifier="button_big" />;
-        break;
-      case 'finished':
-        game = (
-          <div>
-            <Result moves={this.state.moves} />
-            <Button title="Играть снова" clickHandler={this.startGameAgain} modifier="button_big" />
-          </div>
-        );
-        break;
-      case 'running':
-      default:
-        game = (
-          <div>
-            <Counter moves={this.state.moves} />
-            <div className={style.game__inner}>
-              {this.cards.map((card, index) => (
-                <Card
-                  /* eslint-disable */
-                  key={index}
-                  /* eslint-enable */
-                  index={index}
-                  frontCard={card.id}
-                  openCard={this.openCard}
-                  isOpen={this.state.openCards.includes(index)}
-                  isFound={this.state.foundCards.includes(index)}
-                />
-              ))}
-            </div>
-            <BigCard
-              name={this.cards[foundCardIndex].name}
-              age={this.cards[foundCardIndex].birthday}
-              subtitle={this.cards[foundCardIndex].subtitle}
-              description={this.cards[foundCardIndex].description}
-              id={this.cards[foundCardIndex].id}
-              isShown={this.state.showFoundCard}
-              closeFoundCard={this.closeFoundCard}
-            />
-            <div style={{ display: 'none' }}>
-              {data.map(item => (
-                <img key={item.id} src={require(`../../img/large/l_${item.id}@2x.jpg`)} alt="" />
-              ))}
-            </div>
-          </div>
-        );
-        break;
-    }
-
-    return <div className={style.game}>{game}</div>;
+    return (
+      <div className={style.game}>
+        {(() => {
+          switch (this.state.stage) {
+            case 'start':
+              return (
+                <Button title="Начать игру" clickHandler={this.startGame} modifier="button_big" />
+              );
+            case 'finished':
+              return (
+                <div>
+                  <Result moves={this.state.moves} />
+                  <Button
+                    title="Играть снова"
+                    clickHandler={this.startGameAgain}
+                    modifier="button_big"
+                  />
+                </div>
+              );
+            case 'running':
+            default:
+              return (
+                <div>
+                  <Counter moves={this.state.moves} />
+                  <div className={style.game__inner}>
+                    {this.cards.map((card, index) => (
+                      <Card
+                        /* eslint-disable */
+                        key={index}
+                        /* eslint-enable */
+                        index={index}
+                        frontCard={card.id}
+                        openCard={this.openCard}
+                        isOpen={this.state.openCards.includes(index)}
+                        isFound={this.state.foundCards.includes(index)}
+                      />
+                    ))}
+                  </div>
+                  {this.state.showFoundCard ? (
+                    <BigCard
+                      card={this.cards[foundCardIndex]}
+                      closeFoundCard={this.closeFoundCard}
+                    />
+                  ) : (
+                    ''
+                  )}
+                  <div style={{ display: 'none' }}>
+                    {this.props.data.map(item => (
+                      <img
+                        key={item.id}
+                        src={require(`../../img/large/l_${item.id}@2x.jpg`)}
+                        alt=""
+                      />
+                    ))}
+                  </div>
+                </div>
+              );
+          }
+        })()}
+      </div>
+    );
   }
 }
+
+App.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object).isRequired
+};
 
 export default App;

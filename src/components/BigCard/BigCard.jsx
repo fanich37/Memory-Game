@@ -5,30 +5,34 @@ import style from './BigCard.css';
 import { getAgeFromBirthday, getPhraseAccordingToNumber } from '../../helpers';
 
 const BigCard = props => {
-  if (!props.isShown) return '';
+  // if (!props.isShown) return '';
 
   const bigCardClasses = [style.bigcard, style.bigcard_shown, style.bigcard_scaled].join(' ');
-  const photo = require(`../../img/large/l_${props.id}@2x.jpg`);
+  const photo = require(`../../img/large/l_${props.card.id}@2x.jpg`);
   return (
     <div className={bigCardClasses}>
       <article className={style.bigcard__inner}>
-        <img src={photo} alt={props.name} className={style.bigcard__img} />
+        <img src={photo} alt={props.card.name} className={style.bigcard__img} />
         <header className={style.bigcard__header}>
           <h1 className={[style.bigcard__title, style.bigcard__title_h1].join(' ')}>
             <span>
-              {props.name}
+              {props.card.name}
               {', '}
             </span>
             <span>
-              {getPhraseAccordingToNumber(getAgeFromBirthday(props.age), ['лет', 'год', 'года'])}
+              {getPhraseAccordingToNumber(getAgeFromBirthday(props.card.birthday), [
+                'лет',
+                'год',
+                'года'
+              ])}
             </span>
           </h1>
           <h2 className={[style.bigcard__title, style.bigcard__title_h2].join(' ')}>
-            {props.subtitle}
+            {props.card.subtitle}
           </h2>
         </header>
         <section className={style.bigcard__desc}>
-          <p>{props.description}</p>
+          <p>{props.card.description}</p>
         </section>
         <footer className={style.bigcard__footer}>
           <Button title="Дальше" clickHandler={props.closeFoundCard} />
@@ -39,12 +43,14 @@ const BigCard = props => {
 };
 
 BigCard.propTypes = {
-  isShown: PropTypes.bool.isRequired,
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  age: PropTypes.string.isRequired,
-  subtitle: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  // isShown: PropTypes.bool.isRequired,
+  card: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    birthday: PropTypes.string.isRequired,
+    subtitle: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired
+  }).isRequired,
   closeFoundCard: PropTypes.func.isRequired
 };
 

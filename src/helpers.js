@@ -45,20 +45,20 @@ export function getAgeFromBirthday(date) {
   return parseInt((today - dateOfBirth) / YEAR, 10);
 }
 
-export function getPhraseAccordingToNumber(number, arr) {
-  if (number >= 5 && number <= 20) {
-    return `${number} ${arr[0]}`;
+export function pluralize(num, words) {
+  if (
+    num === 0
+    || !(num % 10)
+    || (num >= 5 && num <= 20)
+    || num % 10 >= 5
+    || (num % 100 >= 5 && num % 100 <= 20)
+  ) {
+    return `${num} ${words[0]}`;
   }
 
-  const lastChar = Number(`${number}`.charAt(`${number}`.length - 1));
-
-  if (lastChar === 0 || lastChar >= 5) {
-    return `${number} ${arr[0]}`;
+  if (num === 1 || (num > 20 && num % 10 === 1)) {
+    return `${num} ${words[1]}`;
   }
 
-  if (lastChar === 1) {
-    return `${number} ${arr[1]}`;
-  }
-
-  return `${number} ${arr[2]}`;
+  return `${num} ${words[2]}`;
 }

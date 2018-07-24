@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 import style from './BigCard.css';
-import { getAgeFromBirthday, getPhraseAccordingToNumber } from '../../helpers';
+import { getAgeFromBirthday, pluralize } from '../../helpers';
 
 const BigCard = props => {
   // if (!props.isShown) return '';
@@ -20,11 +20,7 @@ const BigCard = props => {
               {', '}
             </span>
             <span>
-              {getPhraseAccordingToNumber(getAgeFromBirthday(props.card.birthday), [
-                'лет',
-                'год',
-                'года'
-              ])}
+              {pluralize(getAgeFromBirthday(props.card.birthday), ['лет', 'год', 'года'])}
             </span>
           </h1>
           <h2 className={[style.bigcard__title, style.bigcard__title_h2].join(' ')}>

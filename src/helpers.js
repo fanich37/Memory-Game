@@ -4,7 +4,7 @@ function getRandomNumber(max) {
   return (Math.random() * (max - 1)).toFixed();
 }
 
-function getRandomCardsArray(initialArray, numberOfElements) {
+export function getRandomCardsArray(initialArray, numberOfElements) {
   const output = [];
   const cache = {};
   for (let i = 0; output.length < numberOfElements; i++) {
@@ -24,44 +24,28 @@ function getRandomCardsArray(initialArray, numberOfElements) {
   return output;
 }
 
-export { getRandomCardsArray };
+export function cloneObj(obj) {
+  const newObj = obj.constructor();
 
-function copyState(state) {
-  const newState = {};
-
-  Object.keys(state).forEach(property => {
-    if (
-      typeof state[property] === 'number'
-      || typeof state[property] === 'string'
-      || typeof state[property] === 'boolean'
-    ) {
-      newState[property] = state[property];
-    }
-
-    if (typeof state[property] === 'object' && state[property].constructor.name === 'Array') {
-      newState[property] = Object.assign([], state[property]);
-    }
-
-    if (typeof state[property] === 'object' && state[property].constructor.name === 'Object') {
-      newState[property] = Object.assign({}, state[property]);
+  Object.keys(obj).forEach(property => {
+    if (typeof obj[property] !== 'object') {
+      newObj[property] = obj[property];
+    } else {
+      newObj[property] = cloneObj(obj[property]);
     }
   });
 
-  return newState;
+  return newObj;
 }
 
-export { copyState };
-
-function getAgeFromBirthday(date) {
+export function getAgeFromBirthday(date) {
   const today = new Date(Date.now());
   const dateOfBirth = new Date(date);
 
   return parseInt((today - dateOfBirth) / YEAR, 10);
 }
 
-export { getAgeFromBirthday };
-
-function getPhraseAccordingToNumber(number, arr) {
+export function getPhraseAccordingToNumber(number, arr) {
   if (number >= 5 && number <= 20) {
     return `${number} ${arr[0]}`;
   }
@@ -78,5 +62,3 @@ function getPhraseAccordingToNumber(number, arr) {
 
   return `${number} ${arr[2]}`;
 }
-
-export { getPhraseAccordingToNumber };

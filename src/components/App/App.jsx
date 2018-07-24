@@ -6,13 +6,13 @@ import Card from '../Card/Card';
 import BigCard from '../BigCard/BigCard';
 import Button from '../Button/Button';
 import Result from '../Result/Result';
-import { getRandomCardsArray, copyState } from '../../helpers';
+import { getRandomCardsArray, cloneObj } from '../../helpers';
 import { NEW_GAME } from '../../constants/app';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = copyState(NEW_GAME);
+    this.state = cloneObj(NEW_GAME);
     this.openCard = this.openCard.bind(this);
     this.closeFoundCard = this.closeFoundCard.bind(this);
     this.startGame = this.startGame.bind(this);
@@ -25,7 +25,7 @@ class App extends React.Component {
       return;
     }
 
-    const newState = copyState(this.state);
+    const newState = cloneObj(this.state);
     newState.openCards.push(cardIndex);
 
     if (newState.openCards.length === 2) {
@@ -54,7 +54,7 @@ class App extends React.Component {
   }
 
   closeFoundCard() {
-    const newState = copyState(this.state);
+    const newState = cloneObj(this.state);
     const isFinished = this.cards.length === newState.foundCards.length;
 
     this.setState({ showFoundCard: false, stage: isFinished ? 'finished' : undefined });
@@ -65,7 +65,7 @@ class App extends React.Component {
   }
 
   startGameAgain() {
-    const newState = copyState(NEW_GAME);
+    const newState = cloneObj(NEW_GAME);
 
     this.cards = getRandomCardsArray(this.props.data, this.props.data.length * 2);
     this.setState(newState);

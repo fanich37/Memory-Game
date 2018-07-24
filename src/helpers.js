@@ -28,7 +28,7 @@ export function cloneObj(obj) {
   const newObj = obj.constructor();
 
   Object.keys(obj).forEach(property => {
-    if (typeof obj[property] !== 'object') {
+    if (typeof obj[property] !== 'object' && obj[property] === null) {
       newObj[property] = obj[property];
     } else {
       newObj[property] = cloneObj(obj[property]);

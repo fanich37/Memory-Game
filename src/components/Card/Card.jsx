@@ -11,7 +11,7 @@ const Card = props => {
   return (
     /* eslint-disable jsx-a11y/click-events-have-key-events,
     jsx-a11y/no-static-element-interactions */
-    <div className={cardClasses} onClick={() => props.openCard(Number(props.index))}>
+    <div className={cardClasses} onClick={() => props.openCard(props.index)}>
       <div className={style.card__back} />
       <div className={style.card__front} style={{ backgroundImage: `url(${frontSrc})` }} />
     </div>

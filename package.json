@@ -4,8 +4,9 @@
   "description": "The Memory game",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server --mode development",
-    "build": "cross-env NODE_ENV=production webpack --mode production",
+    "start": "cross-env NODE_ENV=development ES_LINT=true webpack-dev-server",
+    "raw": "cross-env NODE_ENV=development ES_LINT=false webpack-dev-server",
+    "build": "cross-env NODE_ENV=production ES_LINT=true webpack",
     "create": "sh create-component.sh"
   },
   "author": "Andrey Alexandrov <me@fan37.ru> (https://github.com/fanich37)",

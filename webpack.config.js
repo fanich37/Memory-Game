@@ -7,10 +7,22 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
+const webPackMode = process.env.NODE_ENV;
 const devMode = process.env.NODE_ENV !== 'production';
+const esLintMode = process.env.ES_LINT !== 'false';
+
+const esLintConfig = esLintMode
+  ? {
+    enforce: 'pre',
+    test: /\.jsx?$/,
+    exclude: /node_modules/,
+    loader: 'eslint-loader'
+  }
+  : {};
 
 module.exports = {
   context: __dirname,
+  mode: webPackMode,
   devtool: 'cheap-eval-source-map',
   entry: ['babel-polyfill', './src/components/Index.jsx'],
   output: {
@@ -23,12 +35,7 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        enforce: 'pre',
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loader: 'eslint-loader'
-      },
+      esLintConfig,
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,

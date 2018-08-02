@@ -66,6 +66,7 @@ class App extends React.Component {
 
   startGameAgain() {
     const newState = cloneObj(NEW_GAME);
+    newState.stage = 'running';
 
     this.cards = getRandomCardsArray(this.props.data, this.props.data.length * 2);
     this.setState(newState);
@@ -82,7 +83,9 @@ class App extends React.Component {
           switch (this.state.stage) {
             case 'start':
               return (
-                <Button title="Начать игру" clickHandler={this.startGame} modifier="button_big" />
+                <Button title="Начать игру" clickHandler={this.startGame} modifier="button_big">
+                  Начать игру
+                </Button>
               );
             case 'finished':
               return (
@@ -92,7 +95,9 @@ class App extends React.Component {
                     title="Играть снова"
                     clickHandler={this.startGameAgain}
                     modifier="button_big"
-                  />
+                  >
+                    Играть снова
+                  </Button>
                 </div>
               );
             case 'running':

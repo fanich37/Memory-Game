@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import style from './Counter.css';
 
-const Counter = props => (
+const Counter = ({ moves }) => (
   <div className={style.counter}>
     <p>
       <span>Ходов: </span>
-      <span>{props.moves}</span>
+      <span>{moves}</span>
     </p>
   </div>
 );

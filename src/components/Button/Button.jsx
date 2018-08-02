@@ -2,31 +2,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import style from './Button.css';
 
-const Button = props => {
-  const buttonClasses = !props.modifier
-    ? style.button
-    : [style.button, style[props.modifier]].join(' ');
+const Button = ({
+  modifier, clickHandler, title, children
+}) => {
+  const buttonClasses = !modifier ? style.button : [style.button, style[modifier]].join(' ');
 
   return (
-    <button
-      type="button"
-      className={buttonClasses}
-      onClick={props.clickHandler}
-      title={props.title}
-    >
-      {props.title}
+    <button type="button" className={buttonClasses} onClick={clickHandler} title={title}>
+      {children}
     </button>
   );
 };
 
 Button.defaultProps = {
-  modifier: ''
+  modifier: '',
+  children: ''
 };
 
 Button.propTypes = {
   modifier: PropTypes.string,
   clickHandler: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  children: PropTypes.string
 };
 
 export default Button;

@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import style from './Result.css';
 import { pluralize } from '../../helpers';
 
-const Result = props => (
+const Result = ({ moves }) => (
   <div className={style.result}>
     <div className={style.result__inner}>
       <p>
-        {`Поздравляем! Вам удалось открыть все карточки за ${pluralize(props.moves, [
+        {`Поздравляем! Вам удалось открыть все карточки за ${pluralize(moves, [
           'ходов',
           'ход',
           'хода'

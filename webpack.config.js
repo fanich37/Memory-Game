@@ -24,7 +24,7 @@ module.exports = {
   context: __dirname,
   mode: webPackMode,
   devtool: 'cheap-eval-source-map',
-  entry: ['babel-polyfill', './src/components/Index.jsx'],
+  entry: ['babel-polyfill', './src/app.jsx'],
   output: {
     filename: 'js/app.js',
     path: path.resolve(__dirname, 'dist'),

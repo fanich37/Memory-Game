@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import style from './Button.css';
 
 const Button = ({
@@ -26,4 +27,18 @@ Button.propTypes = {
   children: PropTypes.string
 };
 
-export default Button;
+/* --- Button Container --- */
+const mapDispatchToStore = (dispatch, ownProps) => ({
+  clickHandler: () => {
+    dispatch({ type: 'SET_STAGE', stage: ownProps.stage });
+  }
+});
+
+const ButtonContainer = connect(
+  null,
+  mapDispatchToStore
+)(Button);
+export default ButtonContainer;
+/* ------------------------ */
+
+// export default Button;

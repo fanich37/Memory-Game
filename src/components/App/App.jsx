@@ -12,56 +12,66 @@ import { NEW_GAME } from '../../constants/app';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = cloneObj(NEW_GAME);
-    this.openCard = this.openCard.bind(this);
+    // this.openCard = this.openCard.bind(this);
     this.closeFoundCard = this.closeFoundCard.bind(this);
-    this.startGame = this.startGame.bind(this);
     this.startGameAgain = this.startGameAgain.bind(this);
-    this.cards = getRandomCardsArray(this.props.data, this.props.data.length * 2);
+    this.cards = getRandomCardsArray(this.props.sourceData, this.props.sourceData.length * 2);
+    this.moves = 0;
   }
 
-  openCard(cardIndex) {
-    if (this.state.openCards.length === 2 || this.state.openCards.includes(cardIndex)) {
-      return;
-    }
+  // openCard(cardIndex) {
+  //   if (this.props.openCards.length === 2 || this.props.openCards.includes(cardIndex)) {
+  //     return;
+  //   }
 
-    const newState = cloneObj(this.state);
-    newState.openCards.push(cardIndex);
+  //   const newState = cloneObj(this.props);
+  //   newState.openCards.push(cardIndex);
 
-    if (newState.openCards.length === 2) {
-      const firstCard = newState.openCards[0];
-      const secondCard = newState.openCards[1];
+  //   if (newState.openCards.length === 2) {
+  //     const firstCard = newState.openCards[0];
+  //     const secondCard = newState.openCards[1];
+  //     const timer = setTimeout(() => {
+  //       if (this.cards[firstCard].name === this.cards[secondCard].name) {
+  //         newState.moves++;
+  //         newState.openCards = [];
+  //         newState.foundCards.push(firstCard, secondCard);
+  //         newState.showFoundCard = true;
+  //         this.setState(newState);
+  //       } else {
+  //         newState.moves++;
+  //         newState.openCards = [];
+  //         this.setState(newState);
+  //       }
+
+  //       clearTimeout(timer);
+  //     }, 1000);
+  //     this.setState(newState);
+  //     return;
+  //   }
+
+  //   this.setState(newState);
+  // }
+  componentDidUpdate() {
+    if (this.props.openCards.length === 2) {
+      this.moves++;
+      const firstCard = this.props.openCards[0];
+      const secondCard = this.props.openCards[1];
       const timer = setTimeout(() => {
         if (this.cards[firstCard].name === this.cards[secondCard].name) {
-          newState.moves++;
-          newState.openCards = [];
-          newState.foundCards.push(firstCard, secondCard);
-          newState.showFoundCard = true;
-          this.setState(newState);
+          this.props.dispatch({ type: 'EMPTY_OPEN_CARD' });
         } else {
-          newState.moves++;
-          newState.openCards = [];
-          this.setState(newState);
+          this.props.dispatch({ type: 'EMPTY_OPEN_CARD' });
         }
-
         clearTimeout(timer);
       }, 1000);
-      this.setState(newState);
-      return;
     }
-
-    this.setState(newState);
   }
 
   closeFoundCard() {
-    const newState = cloneObj(this.state);
+    const newState = cloneObj(this.props);
     const isFinished = this.cards.length === newState.foundCards.length;
 
     this.setState({ showFoundCard: false, stage: isFinished ? 'finished' : undefined });
-  }
-
-  startGame() {
-    this.setState({ stage: 'running' });
   }
 
   startGameAgain() {
@@ -73,24 +83,24 @@ class App extends React.Component {
   }
 
   render() {
-    const foundCardIndex = this.state.foundCards.length
-      ? this.state.foundCards[this.state.foundCards.length - 1]
+    const foundCardIndex = this.props.foundCards.length
+      ? this.props.foundCards[this.props.foundCards.length - 1]
       : 0;
-
+    console.log('1');
     return (
       <div className={style.game}>
         {(() => {
-          switch (this.state.stage) {
+          switch (this.props.stage) {
             case 'start':
               return (
-                <Button title="Начать игру" clickHandler={this.startGame} modifier="button_big">
+                <Button title="Начать игру" modifier="button_big" stage="running">
                   Начать игру
                 </Button>
               );
             case 'finished':
               return (
                 <div>
-                  <Result moves={this.state.moves} />
+                  <Result moves={this.moves} />
                   <Button
                     title="Играть снова"
                     clickHandler={this.startGameAgain}
@@ -104,7 +114,7 @@ class App extends React.Component {
             default:
               return (
                 <div>
-                  <Counter moves={this.state.moves} />
+                  <Counter moves={this.moves} />
                   <div className={style.game__inner}>
                     {this.cards.map((card, index) => (
                       <Card
@@ -113,13 +123,10 @@ class App extends React.Component {
                         /* eslint-enable */
                         index={index}
                         frontCard={card.id}
-                        openCard={this.openCard}
-                        isOpen={this.state.openCards.includes(index)}
-                        isFound={this.state.foundCards.includes(index)}
                       />
                     ))}
                   </div>
-                  {this.state.showFoundCard ? (
+                  {this.props.showFoundCard ? (
                     <BigCard
                       card={this.cards[foundCardIndex]}
                       closeFoundCard={this.closeFoundCard}
@@ -128,7 +135,7 @@ class App extends React.Component {
                     ''
                   )}
                   <div style={{ display: 'none' }}>
-                    {this.props.data.map(item => (
+                    {this.props.sourceData.map(item => (
                       <img
                         key={item.id}
                         src={require(`../../img/large/l_${item.id}@2x.jpg`)}
@@ -145,8 +152,8 @@ class App extends React.Component {
   }
 }
 
-App.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired
-};
+// App.propTypes = {
+//   data: PropTypes.arrayOf(PropTypes.object).isRequired
+// };
 
 export default App;

@@ -1,8 +1,10 @@
+import data from '../../data.json';
+
 export const YEAR = 31556926000;
 
-export const NEW_GAME = {
+export const INITIAL_STATE = {
+  sourceData: data,
   stage: 'start',
-  moves: 0,
   openCards: [],
   foundCards: [],
   showFoundCard: false

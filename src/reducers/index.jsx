@@ -1,0 +1,40 @@
+import { INITIAL_STATE } from '../constants';
+import { cloneObj } from '../helpers';
+
+const rootReducer = (state = INITIAL_STATE, action) => {
+  const newState = cloneObj(state);
+
+  switch (action.type) {
+    case 'START_GAME': {
+      newState.stage = 'running';
+      return newState;
+    }
+    case 'FINISH_GAME': {
+      newState.stage = 'finished';
+      return newState;
+    }
+    case 'OPEN_CARD':
+      if (newState.openCards.length === 2 || state.openCards.includes(action.cardId)) {
+        return state;
+      }
+      newState.openCards.push(action.cardId);
+      return newState;
+    case 'EMPTY_OPEN_CARDS':
+      newState.openCards = [];
+      return newState;
+    case 'ADD_FOUND_CARD':
+      newState.openCards = [];
+      newState.foundCards.push(action.foundCards[0], action.foundCards[1]);
+      newState.showFoundCard = true;
+      return newState;
+    case 'CLOSE_FOUND_CARD':
+      newState.showFoundCard = false;
+      return newState;
+    case 'START_NEW_GAME':
+      return INITIAL_STATE;
+    default:
+      return state;
+  }
+};
+
+export default rootReducer;

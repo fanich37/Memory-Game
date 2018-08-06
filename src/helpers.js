@@ -1,4 +1,4 @@
-import { YEAR } from './constants/app';
+import { YEAR } from './constants';
 
 function getRandomNumber(max) {
   return (Math.random() * (max - 1)).toFixed();

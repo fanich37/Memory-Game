@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import style from './Card.css';
 
 const Card = ({
@@ -24,30 +23,10 @@ const Card = ({
 };
 
 Card.propTypes = {
-  index: PropTypes.number.isRequired,
   frontCard: PropTypes.string.isRequired,
   isOpen: PropTypes.bool.isRequired,
-  isFound: PropTypes.bool.isRequired
-  // openCard: PropTypes.func.isRequired
+  isFound: PropTypes.bool.isRequired,
+  openCard: PropTypes.func.isRequired
 };
 
-/* --- Card container --- */
-const mapStateToProps = (state, ownProps) => ({
-  isOpen: state.openCards.includes(ownProps.index),
-  isFound: state.foundCards.includes(ownProps.index)
-});
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  openCard: () => {
-    dispatch({ type: 'ADD_OPEN_CARD', cardId: ownProps.index });
-  }
-});
-
-const CardContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Card);
-
-export default CardContainer;
-/* ---------------------- */
-
-// export default Card;
+export default Card;

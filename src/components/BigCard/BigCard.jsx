@@ -28,7 +28,7 @@ const BigCard = ({ card, closeFoundCard }) => {
           <p>{card.description}</p>
         </section>
         <footer className={style.bigcard__footer}>
-          <Button title="Дальше" clickHandler={closeFoundCard}>
+          <Button title="Дальше" clickHandler={() => closeFoundCard()}>
             Дальше
           </Button>
         </footer>

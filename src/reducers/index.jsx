@@ -14,15 +14,17 @@ const rootReducer = (state = INITIAL_STATE, action) => {
       return newState;
     }
     case 'OPEN_CARD':
-      if (newState.openCards.length === 2 || state.openCards.includes(action.cardId)) {
+      if (state.openCards.length === 2 || state.openCards.includes(action.cardId)) {
         return state;
       }
       newState.openCards.push(action.cardId);
       return newState;
     case 'EMPTY_OPEN_CARDS':
       newState.openCards = [];
+      newState.moves++;
       return newState;
     case 'ADD_FOUND_CARD':
+      newState.moves++;
       newState.openCards = [];
       newState.foundCards.push(action.foundCards[0], action.foundCards[1]);
       newState.showFoundCard = true;

@@ -6,11 +6,12 @@ import './css/reset.css';
 import './css/base.css';
 import store from './store';
 import AppContainer from './containers/AppContainer';
+import data from '../data.json';
 
 function renderApp() {
   render(
     <Provider store={store}>
-      <AppContainer />
+      <AppContainer sourceData={data} />
     </Provider>,
     document.getElementById('app')
   );

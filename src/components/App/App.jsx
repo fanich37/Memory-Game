@@ -12,12 +12,10 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.cards = getRandomCardsArray(this.props.sourceData, this.props.sourceData.length * 2);
-    this.moves = 0;
   }
 
   componentDidUpdate() {
     if (this.props.openCards.length === 2) {
-      this.moves++;
       const firstCard = this.props.openCards[0];
       const secondCard = this.props.openCards[1];
       const timer = setTimeout(() => {
@@ -39,7 +37,6 @@ class App extends React.Component {
         this.props.dispatch({ type: 'CLOSE_FOUND_CARD' });
       }
     } else {
-      this.moves = 0;
       this.cards = getRandomCardsArray(this.props.sourceData, this.props.sourceData.length * 2);
       this.props.dispatch({ type: 'START_NEW_GAME' });
     }
@@ -67,7 +64,7 @@ class App extends React.Component {
             case 'finished':
               return (
                 <div>
-                  <Result moves={this.moves} />
+                  <Result moves={this.props.moves} />
                   <Button
                     title="Играть снова"
                     clickHandler={() => this.buttonClickHandler()}
@@ -81,7 +78,7 @@ class App extends React.Component {
             default:
               return (
                 <div>
-                  <Counter moves={this.moves} />
+                  <Counter moves={this.props.moves} />
                   <div className={style.game__inner}>
                     {this.cards.map((card, index) => (
                       <Card
@@ -124,6 +121,7 @@ class App extends React.Component {
 
 App.propTypes = {
   sourceData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  moves: PropTypes.number.isRequired,
   openCards: PropTypes.arrayOf(PropTypes.number).isRequired,
   foundCards: PropTypes.arrayOf(PropTypes.number).isRequired,
   stage: PropTypes.string.isRequired,

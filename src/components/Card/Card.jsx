@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import style from './Card.css';
 
 const Card = ({
-  frontCard, isOpen, isFound, openCard
+  frontCard, isOpen, isFound, onClick
 }) => {
   const frontSrc = require(`../../img/small/s_${frontCard}@2x.jpg`);
   const isCardOpen = isOpen ? style.card_open : '';
@@ -13,7 +13,7 @@ const Card = ({
   return (
     /* eslint-disable jsx-a11y/click-events-have-key-events,
     jsx-a11y/no-static-element-interactions */
-    <div className={cardClasses} onClick={() => openCard()}>
+    <div className={cardClasses} onClick={onClick}>
       <div className={style.card__back} />
       <div className={style.card__front} style={{ backgroundImage: `url(${frontSrc})` }} />
     </div>
@@ -26,7 +26,7 @@ Card.propTypes = {
   frontCard: PropTypes.string.isRequired,
   isOpen: PropTypes.bool.isRequired,
   isFound: PropTypes.bool.isRequired,
-  openCard: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired
 };
 
 export default Card;

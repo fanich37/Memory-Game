@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import style from './App.css';
 import Counter from '../Counter/Counter';
-import CardContainer from '../../containers/CardContainer';
+import CardsContainer from '../../containers/CardsContainer';
 import BigCard from '../BigCard/BigCard';
-import Button from '../Button/Button';
+import ButtonContainer from '../../containers/ButtonContainer';
 import Result from '../Result/Result';
 import { getRandomCardsArray } from '../../helpers';
 
@@ -14,20 +14,20 @@ class App extends React.Component {
     this.cards = getRandomCardsArray(this.props.sourceData, this.props.sourceData.length * 2);
   }
 
-  componentDidUpdate() {
-    if (this.props.openCards.length === 2) {
-      const firstCard = this.props.openCards[0];
-      const secondCard = this.props.openCards[1];
-      const timer = setTimeout(() => {
-        if (this.cards[firstCard].name === this.cards[secondCard].name) {
-          this.props.dispatch({ type: 'ADD_FOUND_CARD', foundCards: [firstCard, secondCard] });
-        } else {
-          this.props.dispatch({ type: 'EMPTY_OPEN_CARDS' });
-        }
-        clearTimeout(timer);
-      }, 1000);
-    }
-  }
+  // componentDidUpdate() {
+  //   if (this.props.openCards.length === 2) {
+  //     const firstCard = this.props.openCards[0];
+  //     const secondCard = this.props.openCards[1];
+  //     const timer = setTimeout(() => {
+  //       if (this.cards[firstCard].name === this.cards[secondCard].name) {
+  //         this.props.dispatch({ type: 'ADD_FOUND_CARD', foundCards: [firstCard, secondCard] });
+  //       } else {
+  //         this.props.dispatch({ type: 'EMPTY_OPEN_CARDS' });
+  //       }
+  //       clearTimeout(timer);
+  //     }, 1000);
+  //   }
+  // }
 
   buttonClickHandler() {
     if (this.props.stage !== 'finished') {
@@ -52,15 +52,7 @@ class App extends React.Component {
         {(() => {
           switch (this.props.stage) {
             case 'start':
-              return (
-                <Button
-                  title="Начать игру"
-                  modifier="button_big"
-                  clickHandler={() => this.props.dispatch({ type: 'START_GAME' })}
-                >
-                  Начать игру
-                </Button>
-              );
+              return <ButtonContainer title="Начать игру" modifier="button_big" stage="running" />;
             case 'finished':
               return (
                 <div>
@@ -80,17 +72,9 @@ class App extends React.Component {
                 <div>
                   <Counter moves={this.props.moves} />
                   <div className={style.game__inner}>
-                    {this.cards.map((card, index) => (
-                      <CardContainer
-                        /* eslint-disable */
-                        key={index}
-                        /* eslint-enable */
-                        index={index}
-                        frontCard={card.id}
-                      />
-                    ))}
+                    <CardsContainer cards={this.cards} />
                   </div>
-                  {this.props.showFoundCard ? (
+                  {this.props.stage === 'paused' ? (
                     <BigCard
                       card={this.cards[foundCardIndex]}
                       closeFoundCard={() => this.buttonClickHandler()}
@@ -122,7 +106,6 @@ App.propTypes = {
   openCards: PropTypes.arrayOf(PropTypes.number).isRequired,
   foundCards: PropTypes.arrayOf(PropTypes.number).isRequired,
   stage: PropTypes.string.isRequired,
-  showFoundCard: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired
 };
 

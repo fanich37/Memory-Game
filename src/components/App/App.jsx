@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import style from './App.css';
 import Counter from '../Counter/Counter';
-import Card from '../Card/Card';
+import CardContainer from '../../containers/CardContainer';
 import BigCard from '../BigCard/BigCard';
 import Button from '../Button/Button';
 import Result from '../Result/Result';
@@ -81,15 +81,12 @@ class App extends React.Component {
                   <Counter moves={this.props.moves} />
                   <div className={style.game__inner}>
                     {this.cards.map((card, index) => (
-                      <Card
+                      <CardContainer
                         /* eslint-disable */
                         key={index}
                         /* eslint-enable */
                         index={index}
-                        isOpen={this.props.openCards.includes(index)}
-                        isFound={this.props.foundCards.includes(index)}
                         frontCard={card.id}
-                        openCard={() => this.props.dispatch({ type: 'OPEN_CARD', cardId: index })}
                       />
                     ))}
                   </div>

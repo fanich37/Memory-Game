@@ -20,8 +20,8 @@ const rootReducer = (state = INITIAL_STATE, action) => {
       newState.openCards.push(action.cardId);
       return newState;
     case 'EMPTY_OPEN_CARDS':
-      newState.openCards = [];
       newState.moves++;
+      newState.openCards = [];
       return newState;
     case 'ADD_FOUND_CARD':
       newState.moves++;

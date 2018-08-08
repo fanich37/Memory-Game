@@ -3,6 +3,7 @@ import Cards from '../components/Cards/Cards';
 import { openCard } from '../actionCreators';
 
 const mapStateToProps = state => ({
+  cards: state.cards,
   openCards: state.openCards,
   foundCards: state.foundCards
 });

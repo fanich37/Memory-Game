@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '../Button/Button';
+import ButtonContainer from '../../containers/ButtonContainer';
 import style from './BigCard.css';
 import { getAgeFromBirthday, pluralize } from '../../helpers';
 
-const BigCard = ({ card, closeFoundCard }) => {
-  const bigCardClasses = [style.bigcard, style.bigcard_shown, style.bigcard_scaled].join(' ');
+const BigCard = ({ card, stage }) => {
+  const bigCardClasses = stage === 'paused'
+    ? [style.bigcard, style.bigcard_shown, style.bigcard_scaled].join(' ')
+    : style.bigcard;
   const photo = require(`../../img/large/l_${card.id}@2x.jpg`);
 
   return (
@@ -28,9 +30,7 @@ const BigCard = ({ card, closeFoundCard }) => {
           <p>{card.description}</p>
         </section>
         <footer className={style.bigcard__footer}>
-          <Button title="Дальше" clickHandler={() => closeFoundCard()}>
-            Дальше
-          </Button>
+          <ButtonContainer />
         </footer>
       </article>
     </div>
@@ -45,7 +45,7 @@ BigCard.propTypes = {
     subtitle: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired
   }).isRequired,
-  closeFoundCard: PropTypes.func.isRequired
+  stage: PropTypes.string.isRequired
 };
 
 export default BigCard;

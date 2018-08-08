@@ -15,13 +15,19 @@
 }
 
 .game__inner {
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  width: 335px;
-  height: 100%;
+  display: block;
+}
+
+.game__inner_hidden {
+  display: none;
+}
+
+.game__btnWrapper {
+  display: block;
+}
+
+.game__btnWrapper_hidden {
+  display: none;
 }
 
 @media screen and (max-width: 649px) {

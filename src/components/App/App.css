@@ -16,6 +16,7 @@
 
 .game__inner {
   display: block;
+  width: 335px;
 }
 
 .game__inner_hidden {

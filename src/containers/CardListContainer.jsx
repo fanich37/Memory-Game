@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Cards from '../components/Cards/Cards';
+import CardList from '../components/CardList/CardList';
 import { openCard } from '../actionCreators';
 
 const mapStateToProps = state => ({
@@ -12,9 +12,9 @@ const mapDispatchToProps = dispatch => ({
   clickHandler: index => dispatch(openCard(index))
 });
 
-const CardsContainer = connect(
+const CardListContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Cards);
+)(CardList);
 
-export default CardsContainer;
+export default CardListContainer;

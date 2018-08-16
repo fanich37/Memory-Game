@@ -23,18 +23,20 @@
   animation-fill-mode: forwards;
 }
 
+.bigcard__figure {
+  border-radius: 4px;
+  overflow: hidden;
+}
+
 .bigcard__img {
+  display: block;
   width: 100%;
   height: auto;
 }
 
-.bigcard__img,
-.bigcard__title {
-  margin-bottom: 10px;
-}
-
+.bigcard__header,
 .bigcard__desc {
-  margin-bottom: 16px;
+  margin-top: 10px;
 }
 
 .bigcard__title {
@@ -47,6 +49,7 @@
 }
 
 .bigcard__title_h2 {
+  margin-top: 4px;
   font-size: 16px;
 }
 
@@ -54,6 +57,10 @@
   font-size: 14px;
   line-height: 1.2;
   letter-spacing: 1px;
+}
+
+.bigcard__footer {
+  margin-top: 16px;
 }
 
 @keyframes scaleBigCard {

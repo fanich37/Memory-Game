@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Card from '../Card/Card';
-import style from './Cards.css';
+import style from './CardList.css';
 
-const Cards = ({
+const CardList = ({
   cards, clickHandler, openCards, foundCards
 }) => (
-  <div className={style.cards}>
+  <div className={style.cardlist}>
     {cards.map((card, index) => (
       <Card
         key={index} // eslint-disable-line react/no-array-index-key
         index={index}
-        frontCard={card.id}
+        frontCard={card.src}
         onClick={() => clickHandler(index)}
         isOpen={openCards.includes(index)}
         isFound={foundCards.includes(index)}
@@ -20,11 +20,11 @@ const Cards = ({
   </div>
 );
 
-Cards.propTypes = {
+CardList.propTypes = {
   cards: PropTypes.arrayOf(PropTypes.object).isRequired,
   openCards: PropTypes.arrayOf(PropTypes.number).isRequired,
   foundCards: PropTypes.arrayOf(PropTypes.number).isRequired,
   clickHandler: PropTypes.func.isRequired
 };
 
-export default Cards;
+export default CardList;

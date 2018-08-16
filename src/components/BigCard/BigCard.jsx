@@ -3,17 +3,20 @@ import PropTypes from 'prop-types';
 import ButtonContainer from '../../containers/ButtonContainer';
 import style from './BigCard.css';
 import { getAgeFromBirthday, pluralize } from '../../helpers';
+import { STAGES } from '../../constants';
 
 const BigCard = ({ card, stage }) => {
-  const bigCardClasses = stage === 'paused'
+  const bigCardClasses = stage === STAGES.PAUSED
     ? [style.bigcard, style.bigcard_shown, style.bigcard_scaled].join(' ')
     : style.bigcard;
-  const photo = require(`../../img/large/l_${card.id}@2x.jpg`);
+  const photo = require(`../../img/large/l_${card.slug}@2x.jpg`);
 
   return (
     <div className={bigCardClasses}>
       <article className={style.bigcard__inner}>
-        <img src={photo} alt={card.name} className={style.bigcard__img} />
+        <figure className={style.bigcard__figure}>
+          <img src={photo} alt={card.name} className={style.bigcard__img} />
+        </figure>
         <header className={style.bigcard__header}>
           <h1 className={[style.bigcard__title, style.bigcard__title_h1].join(' ')}>
             <span>
@@ -39,7 +42,7 @@ const BigCard = ({ card, stage }) => {
 
 BigCard.propTypes = {
   card: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     birthday: PropTypes.string.isRequired,
     subtitle: PropTypes.string.isRequired,

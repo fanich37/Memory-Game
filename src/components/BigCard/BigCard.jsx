@@ -1,14 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import ButtonContainer from '../../containers/ButtonContainer';
 import style from './BigCard.css';
 import { getAgeFromBirthday, pluralize } from '../../helpers';
 import { STAGES } from '../../constants';
 
 const BigCard = ({ card, stage }) => {
-  const bigCardClasses = stage === STAGES.PAUSED
-    ? [style.bigcard, style.bigcard_shown, style.bigcard_scaled].join(' ')
-    : style.bigcard;
+  const bigCardClasses = classNames({
+    [style.bigcard]: true,
+    [style.bigcard_shown]: stage === STAGES.PAUSED,
+    [style.bigcard_scaled]: stage === STAGES.PAUSED
+  });
   const photo = require(`../../img/large/l_${card.slug}@2x.jpg`);
 
   return (

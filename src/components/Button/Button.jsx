@@ -1,11 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import style from './Button.css';
 
 const Button = ({
   modifier, onClick, title, stage
 }) => {
-  const buttonClasses = !modifier ? style.button : [style.button, style[modifier]].join(' ');
+  const buttonClasses = classNames({
+    [style.button]: true,
+    [style[modifier]]: modifier
+  });
 
   return (
     <button type="button" className={buttonClasses} onClick={() => onClick(stage)} title={title}>

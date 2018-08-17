@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import style from './Card.css';
 
 const Card = ({
   frontCard, isOpen, isFound, onClick
 }) => {
-  const isCardOpen = isOpen ? style.card_open : '';
-  const isCardFound = isFound ? style.card_found : '';
-  const cardClasses = [style.card, isCardOpen, isCardFound].join(' ');
+  const cardClasses = classNames({
+    [style.card]: true,
+    [style.card_open]: isOpen,
+    [style.card_found]: isFound
+  });
 
   return (
     <button type="button" className={cardClasses} onClick={onClick}>

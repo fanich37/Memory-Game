@@ -43,4 +43,6 @@ export const openCard = index => (dispatch, getState) => new Promise(resolve => 
       });
     }
   }
+
+  return false;
 });

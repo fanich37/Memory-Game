@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import style from './App.css';
 import CardListContainer from '../../containers/CardListContainer';
 import ButtonContainer from '../../containers/ButtonContainer';
@@ -10,13 +11,15 @@ import PicList from '../PicList/PicList';
 import { STAGES } from '../../constants';
 
 const App = ({ sourceData, stage }) => {
-  const gameInnerClassNames = stage === STAGES.RUNNING || stage === STAGES.PAUSED
-    ? style.game__inner
-    : [style.game__inner, style.game__inner_hidden].join(' ');
+  const gameInnerClassNames = classNames({
+    [style.game__inner]: stage === STAGES.RUNNING || stage === STAGES.PAUSED,
+    [style.game__inner_hidden]: stage === STAGES.FINISHED || stage === STAGES.START
+  });
 
-  const buttonWrapperClassNames = stage === STAGES.START
-    ? style.game__btnWrapper
-    : [style.game__btnWrapper, style.game__btnWrapper_hidden].join(' ');
+  const buttonWrapperClassNames = classNames({
+    [style.game__btnWrapper]: stage === STAGES.START,
+    [style.game__btnWrapper_hidden]: stage !== STAGES.START
+  });
 
   return (
     <div className={style.game}>

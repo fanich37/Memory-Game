@@ -29,7 +29,7 @@ const rootReducer = (
     }
 
     case OPEN_CARD:
-      if (state.openCards.length === 2 || state.openCards.includes(action.index)) {
+      if (state.openCards.includes(action.index)) {
         return state;
       }
       newState.openCards.push(action.index);

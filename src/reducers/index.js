@@ -10,7 +10,7 @@ const rootReducer = (
     moves: 0,
     openCards: [],
     foundCards: [],
-    cards: getRandomCardsArray(data, data.length * 2)
+    cards: getRandomCardsArray(data)
   },
   action
 ) => {
@@ -22,7 +22,7 @@ const rootReducer = (
         newState.moves = 0;
         newState.openCards = [];
         newState.foundCards = [];
-        newState.cards = getRandomCardsArray(data, data.length * 2);
+        newState.cards = getRandomCardsArray(data);
       }
       newState.stage = action.stage;
       return newState;

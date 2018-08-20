@@ -1,57 +1,30 @@
 import shortId from 'shortid';
 import { YEAR } from './constants';
 
-function getRandomNumber(max) {
-  return (Math.random() * (max - 1)).toFixed();
+function doubleArray(array) {
+  return array.map(item => [item, item]).reduce((prev, curr) => prev.concat(curr), []);
 }
 
-// function doubleArray(array) {
-//   return array.map(item => [item, item]).reduce((prev, curr) => prev.concat(curr), []);
-// }
+function setKeys(array) {
+  return array.map(item => {
+    const newItem = Object.assign({}, item, { key: shortId.generate() });
+    return newItem;
+  });
+}
 
-// function sortArrayRandomly(array) {
-//   return array.sort(() => 0.5 - Math.random()).sort(() => 0.5 - Math.random());
-// }
+function sortArrayRandomly(array) {
+  return array.sort(() => 0.5 - Math.random()).sort(() => 0.5 - Math.random());
+}
 
-// function prepareCards(array) {
-//   return array.map(item => {
-//     item.src = require(`./img/small/s_${item.slug}@2x.jpg`);
-//     return item;
-//   });
-// }
+function getPhotoFromCardId(array) {
+  return array.map(item => {
+    const newItem = Object.assign({}, item, { src: require(`./img/small/s_${item.slug}@2x.jpg`) });
+    return newItem;
+  });
+}
 
-// console.log(sortArrayRandomly(doubleArray([1, 2, 3, 4, 5, 6, 7, 8])));
-// console.log(sortArrayRandomly(doubleArray([1, 2, 3, 4, 5, 6, 7, 8])));
-// console.log(sortArrayRandomly(doubleArray([1, 2, 3, 4, 5, 6, 7, 8])));
-// console.log(sortArrayRandomly(doubleArray([1, 2, 3, 4, 5, 6, 7, 8])));
-// console.log(sortArrayRandomly(doubleArray([1, 2, 3, 4, 5, 6, 7, 8])));
-
-export function getRandomCardsArray(initialArray, numberOfElements) {
-  const output = [];
-  const cache = {};
-  for (let i = 0; output.length < numberOfElements; i++) {
-    const index = getRandomNumber(numberOfElements);
-    if (cache[index]) {
-      // eslint-disable-next-line
-      continue;
-    }
-    if (index >= numberOfElements / 2) {
-      cache[index] = 1;
-      output.push(initialArray[index - numberOfElements / 2]);
-      output[output.length - 1].uniqueId = shortId.generate();
-      output[output.length - 1].src = require(`./img/small/s_${
-        output[output.length - 1].slug
-      }@2x.jpg`);
-    } else {
-      cache[index] = 1;
-      output.push(initialArray[index]);
-      output[output.length - 1].uniqueId = shortId.generate();
-      output[output.length - 1].src = require(`./img/small/s_${
-        output[output.length - 1].slug
-      }@2x.jpg`);
-    }
-  }
-  return output;
+export function getRandomCardsArray(initialData) {
+  return sortArrayRandomly(setKeys(doubleArray(getPhotoFromCardId(initialData))));
 }
 
 export function cloneObj(obj) {

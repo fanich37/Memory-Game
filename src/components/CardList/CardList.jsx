@@ -9,7 +9,7 @@ const CardList = ({
   <div className={style.cardlist}>
     {cards.map((card, index) => (
       <Card
-        key={index} // eslint-disable-line react/no-array-index-key
+        key={card.key} // eslint-disable-line react/no-array-index-key
         index={index}
         frontCard={card.src}
         onClick={() => clickHandler(index)}

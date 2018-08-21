@@ -1,4 +1,4 @@
-import { cloneObj, getRandomCardsArray } from '../helpers';
+import { cloneObj, getCardsForGame, sortArrayRandomly } from '../helpers';
 import {
   CLOSE_OPEN_CARDS, SET_STAGE, ADD_FOUND_CARD, OPEN_CARD, STAGES
 } from '../constants';
@@ -10,7 +10,7 @@ const rootReducer = (
     moves: 0,
     openCards: [],
     foundCards: [],
-    cards: getRandomCardsArray(data)
+    cards: getCardsForGame(data)
   },
   action
 ) => {
@@ -22,7 +22,7 @@ const rootReducer = (
         newState.moves = 0;
         newState.openCards = [];
         newState.foundCards = [];
-        newState.cards = getRandomCardsArray(data);
+        newState.cards = sortArrayRandomly(state.cards);
       }
       newState.stage = action.stage;
       return newState;

@@ -13,12 +13,12 @@ function getPhotoFromCardId(array) {
   return array.map(item => Object.assign({}, item, { src: require(`./img/small/s_${item.slug}@2x.jpg`) }));
 }
 
-function sortArrayRandomly(array) {
+export function sortArrayRandomly(array) {
   return array.sort(() => 0.5 - Math.random()).sort(() => 0.5 - Math.random());
 }
 
-export function getRandomCardsArray(initialData) {
-  return sortArrayRandomly(setKeys(doubleArray(getPhotoFromCardId(initialData))));
+export function getCardsForGame(initialData) {
+  return setKeys(doubleArray(getPhotoFromCardId(initialData)));
 }
 
 export function cloneObj(obj) {

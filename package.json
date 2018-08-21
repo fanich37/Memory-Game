@@ -10,18 +10,6 @@
     "create": "sh create-component.sh",
     "test": "jest"
   },
-  "jest": {
-    "verbose": true,
-    "testURL": "http://localhost/",
-    "moduleFileExtensions": [
-      "js",
-      "jsx"
-    ],
-    "moduleDirectories": [
-      "node_modules",
-      "src"
-    ]
-  },
   "author": "Andrey Alexandrov <me@fan37.ru> (https://github.com/fanich37)",
   "license": "MIT",
   "devDependencies": {

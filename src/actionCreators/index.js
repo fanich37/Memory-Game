@@ -24,8 +24,7 @@ export const openCard = index => (dispatch, getState) => new Promise(resolve => 
     const state = getState();
 
     if (state.openCards.length === 2) {
-      const firstCardIndex = state.openCards[0];
-      const secondCardIndex = state.openCards[1];
+      const [firstCardIndex, secondCardIndex] = state.openCards;
       const firstCard = state.cards[firstCardIndex];
       const secondCard = state.cards[secondCardIndex];
 

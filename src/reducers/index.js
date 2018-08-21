@@ -44,7 +44,7 @@ const rootReducer = (
       newState.stage = STAGES.PAUSED;
       newState.moves++;
       newState.openCards = [];
-      newState.foundCards.push(action.foundCards[0], action.foundCards[1]);
+      newState.foundCards.push(...action.foundCards);
       return newState;
 
     default:

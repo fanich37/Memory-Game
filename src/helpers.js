@@ -1,26 +1,20 @@
 import shortId from 'shortid';
 import { YEAR } from './constants';
 
-function doubleArray(array) {
+export function doubleArray(array) {
   return array.map(item => [item, item]).reduce((prev, curr) => prev.concat(curr), []);
 }
 
 function setKeys(array) {
-  return array.map(item => {
-    const newItem = Object.assign({}, item, { key: shortId.generate() });
-    return newItem;
-  });
+  return array.map(item => Object.assign({}, item, { key: shortId.generate() }));
+}
+
+function getPhotoFromCardId(array) {
+  return array.map(item => Object.assign({}, item, { src: require(`./img/small/s_${item.slug}@2x.jpg`) }));
 }
 
 function sortArrayRandomly(array) {
   return array.sort(() => 0.5 - Math.random()).sort(() => 0.5 - Math.random());
-}
-
-function getPhotoFromCardId(array) {
-  return array.map(item => {
-    const newItem = Object.assign({}, item, { src: require(`./img/small/s_${item.slug}@2x.jpg`) });
-    return newItem;
-  });
 }
 
 export function getRandomCardsArray(initialData) {
